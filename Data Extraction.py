@@ -17,11 +17,11 @@ def export_discharge_summary_notes_to_csv():
         LEFT JOIN diagnoses_icd d ON a.hadm_id = d.hadm_id
         WHERE n.category = 'Discharge summary'
         GROUP BY n.row_id, n.chartdate, n.text, a.hospital_expire_flag
-        limit 35000
+        limit 10000
     """)
 
     # Export notes to CSV file
-    with open('discharge_summary_notes_sample(35).csv', mode='w', newline='', encoding='utf-8') as file:
+    with open('discharge_summary_notes_sample(3).csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['note_id', 'chartdate', 'note_text', 'hospital_expire_flag', 'icd9_codes'])
         for note_id, chartdate, note_text, hospital_expire_flag, icd9_codes in cur:
